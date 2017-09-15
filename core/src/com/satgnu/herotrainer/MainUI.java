@@ -1,5 +1,6 @@
 package com.satgnu.herotrainer;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -27,14 +28,11 @@ public class MainUI {
         verticalBarSkin.add("default", font);
 
         //Create a texture
-        Pixmap pixmap = new Pixmap(40,10, Pixmap.Format.RGB888);
-        pixmap.setColor(Color.WHITE);
-        pixmap.fill();
-        verticalBarSkin.add("background",new Texture(pixmap));
+        verticalBarSkin.add("background",new Texture(Gdx.files.internal("ui/button2.png")));
 
         //Create a button style
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
-        textButtonStyle.up = verticalBarSkin.newDrawable("background", Color.BROWN);
+        textButtonStyle.up = verticalBarSkin.newDrawable("background", Color.WHITE);
         textButtonStyle.down = verticalBarSkin.newDrawable("background", Color.DARK_GRAY);
         textButtonStyle.checked = verticalBarSkin.newDrawable("background", Color.DARK_GRAY);
         textButtonStyle.over = verticalBarSkin.newDrawable("background", Color.LIGHT_GRAY);
