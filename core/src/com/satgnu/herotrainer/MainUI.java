@@ -48,6 +48,7 @@ public class MainUI {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 button1.setChecked(false);
+                Audio.playSound("sfx/click.wav", 1f);
                 event.stop();
             }
         });
@@ -60,6 +61,7 @@ public class MainUI {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 button2.setChecked(false);
+                Audio.playSound("sfx/click.wav", 1f);
                 event.stop();
             }
         });
@@ -72,6 +74,7 @@ public class MainUI {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 button3.setChecked(false);
+                Audio.playSound("sfx/click.wav", 1f);
                 event.stop();
             }
         });

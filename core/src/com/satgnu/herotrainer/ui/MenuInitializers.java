@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Scaling;
+import com.satgnu.herotrainer.Audio;
 import com.satgnu.herotrainer.GameState;
 import com.satgnu.herotrainer.MenuHandler;
 
@@ -31,6 +32,7 @@ public class MenuInitializers {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 btnPlay.setChecked(false);
+                Audio.playSound("sfx/click.wav", 1f);
                 MenuHandler.setMenu("ingame");
                 event.stop();
             }
@@ -45,6 +47,7 @@ public class MenuInitializers {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 btnLoad.setChecked(false);
+                Audio.playSound("sfx/click.wav", 1f);
                 MenuHandler.setMenu("ingame");
                 event.stop();
             }
@@ -59,6 +62,7 @@ public class MenuInitializers {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 btnOptions.setChecked(false);
+                Audio.playSound("sfx/click.wav", 1f);
                 MenuHandler.setMenu("ingame");
                 event.stop();
             }
@@ -73,6 +77,7 @@ public class MenuInitializers {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 btnExit.setChecked(false);
+                Audio.playSound("sfx/click.wav", 1f);
                 Gdx.app.exit(); // FIXME exit properly
                 event.stop();
             }
