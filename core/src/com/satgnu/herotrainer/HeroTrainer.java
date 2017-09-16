@@ -22,7 +22,9 @@ public class HeroTrainer extends ApplicationAdapter {
 		Gdx.input.setInputProcessor(stage);
 		batch = new SpriteBatch();
 
+		MenuHandler.initialise();
 		mainUI = new MainUI(font, stage);
+		MenuHandler.setMenu("main");
 	}
 
 	@Override
@@ -31,15 +33,29 @@ public class HeroTrainer extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		batch.begin();
+		if(MenuHandler.getMenu() == "ingame")
+		{
+			// do game stuff
+		}
 		batch.end();
 
-		stage.act();
-		stage.draw();
+		if(MenuHandler.getMenu() == "ingame")
+		{
+			Gdx.input.setInputProcessor(stage); // this is a hack until ingame stage becomes a proper Menu object
+			stage.act();
+			stage.draw();
+		}
+		else
+		{
+			MenuHandler.update();
+			MenuHandler.draw();
+		}
 	}
 
 	@Override
 	public void resize(int width, int height) {
 		stage.getViewport().update(width, height, true);
+		MenuHandler.resize(width, height);
 	}
 
 	@Override
