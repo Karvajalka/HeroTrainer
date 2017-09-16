@@ -1,11 +1,13 @@
 package com.satgnu.herotrainer.ui;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.satgnu.herotrainer.AnimatedSprite;
 import com.satgnu.herotrainer.GameState;
 import com.satgnu.herotrainer.MenuHandler;
@@ -13,7 +15,7 @@ import com.satgnu.herotrainer.MenuHandler;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Splash {
+public class Splash implements InputProcessor {
     private AnimatedSprite logo;
     private final float duration = 3.1f;
 
@@ -31,6 +33,7 @@ public class Splash {
         logo.play("play", true);
 
         this.batch = batch;
+        Gdx.input.setInputProcessor(this);
     }
 
     Color fg_color = new Color(.95f, .95f, .95f, 1f);
@@ -75,5 +78,47 @@ public class Splash {
             GameState.inSplash = false;
             MenuHandler.setMenu("main");
         }
+    }
+
+    @Override
+    public boolean keyDown(int keycode) {
+        return false;
+    }
+
+    @Override
+    public boolean keyUp(int keycode) {
+        return false;
+    }
+
+    @Override
+    public boolean keyTyped(char character) {
+        return false;
+    }
+
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        GameState.inSplash = false;
+        MenuHandler.setMenu("main");
+        return false;
+    }
+
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
+        return false;
+    }
+
+    @Override
+    public boolean mouseMoved(int screenX, int screenY) {
+        return false;
+    }
+
+    @Override
+    public boolean scrolled(int amount) {
+        return false;
     }
 }
