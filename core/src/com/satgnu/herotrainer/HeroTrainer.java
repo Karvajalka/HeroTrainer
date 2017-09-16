@@ -8,7 +8,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.satgnu.herotrainer.entity.Hero;
 import com.satgnu.herotrainer.ui.Splash;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HeroTrainer extends ApplicationAdapter {
 	SpriteBatch batch;
@@ -17,6 +21,7 @@ public class HeroTrainer extends ApplicationAdapter {
 	MainUI mainUI;
 
 	Splash splashScreen;
+	List<Hero> heroList;
 
 	@Override
 	public void create () {
@@ -26,9 +31,14 @@ public class HeroTrainer extends ApplicationAdapter {
 		batch = new SpriteBatch();
 
 		MenuHandler.initialise();
-		mainUI = new MainUI(font, stage);
+		mainUI = new MainUI(font, stage, this);
 
 		splashScreen = new Splash(batch);
+		heroList = new ArrayList<Hero>();
+		heroList.add(new Hero());
+		heroList.add(new Hero());
+		heroList.add(new Hero());
+		heroList.add(new Hero());
 	}
 
 	@Override
@@ -46,6 +56,8 @@ public class HeroTrainer extends ApplicationAdapter {
 		if(MenuHandler.getMenu() == "ingame")
 		{
 			// do game stuff
+			mainUI.drawBackground();
+			mainUI.drawHeroBar();
 		}
 		batch.end();
 

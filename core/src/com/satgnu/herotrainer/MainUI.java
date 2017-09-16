@@ -10,17 +10,26 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.satgnu.herotrainer.entity.Hero;
+
+import java.util.Iterator;
 
 public class MainUI {
+    HeroTrainer mainApp;
     BitmapFont font;
     Skin verticalBarSkin;
     Stage stage;
+    Texture texHeroPortrait;
+    Texture mainBackground;
 
-    public MainUI (BitmapFont f, Stage s) {
+    public MainUI (BitmapFont f, Stage s, HeroTrainer h) {
+        mainApp = h;
         font = f;
         stage = s;
         createSkins();
         createSideBar();
+        texHeroPortrait = new Texture(Gdx.files.internal("ui/portrait_background2.png"));
+        mainBackground = new Texture(Gdx.files.internal("ui/background.png"));
     }
 
     public void createSkins () {
@@ -28,7 +37,7 @@ public class MainUI {
         verticalBarSkin.add("default", font);
 
         //Create a texture
-        verticalBarSkin.add("background",new Texture(Gdx.files.internal("ui/button2.png")));
+        verticalBarSkin.add("background", new Texture(Gdx.files.internal("ui/button2.png")));
 
         //Create a button style
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
@@ -80,6 +89,23 @@ public class MainUI {
         });
         stage.addActor(button3);
     }
+
+    public void drawBackground() {
+        mainApp.batch.draw(mainBackground,0,0, Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+    }
+
+    public void drawHeroBar() {
+        Iterator<Hero> iterator;
+
+        iterator = mainApp.heroList.iterator();
+        int y = 128;
+        while(iterator.hasNext()) {
+            Hero next = iterator.next();
+            mainApp.batch.draw(texHeroPortrait, 10, y);
+            y += 66;
+        }
+    }
+
     public void dispose() {
         verticalBarSkin.dispose();
     }
