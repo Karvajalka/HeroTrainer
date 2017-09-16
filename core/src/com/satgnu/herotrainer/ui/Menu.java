@@ -29,7 +29,7 @@ public class Menu {
         skin.add("default", new BitmapFont()); // FIXME
 
         //Create a texture
-        skin.add("background",new Texture(Gdx.files.internal("ui/button2.png")));
+        skin.add("background",new Texture(Gdx.files.internal("ui/button1.png")));
 
         //Create a button style
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
