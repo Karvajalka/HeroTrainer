@@ -27,7 +27,6 @@ public class HeroTrainer extends ApplicationAdapter {
 
 		MenuHandler.initialise();
 		mainUI = new MainUI(font, stage);
-		MenuHandler.setMenu("main");
 
 		splashScreen = new Splash(batch);
 	}
