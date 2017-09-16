@@ -1,5 +1,6 @@
 package com.satgnu.herotrainer;
 
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.satgnu.herotrainer.ui.Menu;
 import com.satgnu.herotrainer.ui.MenuInitializers;
 
@@ -35,7 +36,10 @@ public class MenuHandler {
         current_menu = menu;
         Menu m = menus.get(current_menu);
         if(m != null)
+        {
             m.setActive();
+            m.getStage().addAction(Actions.sequence(Actions.alpha(0.2f), Actions.fadeIn(0.5f)));
+        }
 
         // TODO should probably check menu is loaded here otherwise it will null crash
     }

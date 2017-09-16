@@ -71,4 +71,9 @@ public class Menu {
     {
         return skin;
     }
+
+    public Stage getStage()
+    {
+        return stage;
+    }
 }
