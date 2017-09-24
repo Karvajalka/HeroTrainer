@@ -24,6 +24,7 @@ public class MainUI {
     public Texture gradientBlue;
     public Texture gradientOrange;
     public Texture gradientGreen;
+    public Texture portraitThorn;
 
     public MainUI (BitmapFont f, Stage s, HeroTrainer h) {
         mainApp = h;
@@ -31,6 +32,7 @@ public class MainUI {
         stage = s;
         texHeroPortrait = new Texture(Gdx.files.internal("ui/portrait_background2.png"));
         mainBackground = new Texture(Gdx.files.internal("ui/background.png"));
+        portraitThorn = new Texture(Gdx.files.internal("ui/portrait_thorn.png"));
 
         gradientRed = new Texture(Gdx.files.internal("ui/gradientred.png"));
         gradientOrange = new Texture(Gdx.files.internal("ui/gradientorange.png"));
@@ -47,7 +49,7 @@ public class MainUI {
 
         //Create a texture
         verticalBarSkin.add("background", new Texture(Gdx.files.internal("ui/button2.png")));
-        verticalBarSkin.add("portrait_bg", new Texture(Gdx.files.internal("ui/portrait_background2.png")));
+        verticalBarSkin.add("portrait_bg", portraitThorn);
 
         //Create a button style
         TextButton.TextButtonStyle textButtonStyle = new TextButton.TextButtonStyle();
