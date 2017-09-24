@@ -12,16 +12,17 @@ import com.satgnu.herotrainer.entity.Hero;
 import com.satgnu.herotrainer.ui.Splash;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class HeroTrainer extends ApplicationAdapter {
-	SpriteBatch batch;
-	Stage stage;
-	BitmapFont font;
-	MainUI mainUI;
+	public SpriteBatch batch;
+	public Stage stage;
+	public BitmapFont font;
+	public MainUI mainUI;
 
 	Splash splashScreen;
-	List<Hero> heroList;
+	public List<Hero> heroList;
 
 	@Override
 	public void create () {
@@ -35,10 +36,10 @@ public class HeroTrainer extends ApplicationAdapter {
 
 		splashScreen = new Splash(batch);
 		heroList = new ArrayList<Hero>();
-		heroList.add(new Hero());
-		heroList.add(new Hero());
-		heroList.add(new Hero());
-		heroList.add(new Hero());
+		heroList.add(new Hero(this));
+		heroList.add(new Hero(this));
+		heroList.add(new Hero(this));
+		heroList.add(new Hero(this));
 	}
 
 	@Override
@@ -57,7 +58,11 @@ public class HeroTrainer extends ApplicationAdapter {
 		{
 			// do game stuff
 			mainUI.drawBackground();
-			mainUI.drawHeroBar();
+			Iterator<Hero> iterator = heroList.iterator();
+			while(iterator.hasNext()) {
+				Hero next = iterator.next();
+				next.Draw();
+			}
 		}
 		batch.end();
 
