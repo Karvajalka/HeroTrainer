@@ -5,10 +5,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.satgnu.herotrainer.entity.Hero;
+import com.satgnu.herotrainer.game.inventory.Inventory;
+import com.satgnu.herotrainer.game.inventory.Item;
+import com.satgnu.herotrainer.ui.HudInventory;
 import com.satgnu.herotrainer.ui.Splash;
 
 import java.util.ArrayList;
@@ -16,30 +20,32 @@ import java.util.Iterator;
 import java.util.List;
 
 public class HeroTrainer extends ApplicationAdapter {
-	public SpriteBatch batch;
-	public Stage stage;
-	public BitmapFont font;
+
 	public MainUI mainUI;
 
 	Splash splashScreen;
 	public List<Hero> heroList;
 
+	public HudInventory hud_inventory;
+
 	@Override
 	public void create () {
-		font = new BitmapFont();
-		stage = new Stage();
-		Gdx.input.setInputProcessor(stage);
-		batch = new SpriteBatch();
+		Render.Initialise();
 
 		MenuHandler.initialise();
-		mainUI = new MainUI(font, stage, this);
+		mainUI = new MainUI(Render.font, Render.stage, this);
 
-		splashScreen = new Splash(batch);
+		splashScreen = new Splash(Render.batch);
 		heroList = new ArrayList<Hero>();
 		heroList.add(new Hero(this));
 		heroList.add(new Hero(this));
 		heroList.add(new Hero(this));
 		heroList.add(new Hero(this));
+
+		GameState.inventory = new Inventory();
+		GameState.inventory.addToInventory(new Item(Item.Type.Scale), 3);
+		GameState.inventory.addToInventory(new Item(Item.Type.FancyScale), 7);
+		hud_inventory = new HudInventory(GameState.inventory);
 	}
 
 	@Override
@@ -53,7 +59,7 @@ public class HeroTrainer extends ApplicationAdapter {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		batch.begin();
+		Render.StartBatch();
 		if(MenuHandler.getMenu() == "ingame")
 		{
 			// do game stuff
@@ -63,14 +69,16 @@ public class HeroTrainer extends ApplicationAdapter {
 				Hero next = iterator.next();
 				next.Draw();
 			}
+
+			hud_inventory.draw(new Vector2(300, 20));
 		}
-		batch.end();
+		Render.FlipBatch();
 
 		if(MenuHandler.getMenu() == "ingame")
 		{
-			Gdx.input.setInputProcessor(stage); // this is a hack until ingame stage becomes a proper Menu object
-			stage.act();
-			stage.draw();
+			Gdx.input.setInputProcessor(Render.stage); // this is a hack until ingame stage becomes a proper Menu object
+			Render.stage.act();
+			Render.stage.draw();
 		}
 		else
 		{
@@ -81,15 +89,13 @@ public class HeroTrainer extends ApplicationAdapter {
 
 	@Override
 	public void resize(int width, int height) {
-		stage.getViewport().update(width, height, true);
+		Render.Resize(width, height);
 		MenuHandler.resize(width, height);
 	}
 
 	@Override
 	public void dispose () {
-		batch.dispose();
-		stage.dispose();
-		font.dispose();
+		Render.Shutdown();
 		mainUI.dispose();
 	}
 }

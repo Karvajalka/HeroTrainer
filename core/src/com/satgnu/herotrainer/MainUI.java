@@ -110,7 +110,7 @@ public class MainUI {
     }
 
     public void drawBackground() {
-        mainApp.batch.draw(mainBackground,0,0);
+        Render.batch.draw(mainBackground,0,0);
     }
 
     public void drawHeroPage(Hero hero, int origin_y) {
@@ -123,20 +123,20 @@ public class MainUI {
         int agiMax = hero.attributesMax.GetAttribute(BaseAttributes.Attribute.Agility);
         int mindMax = hero.attributesMax.GetAttribute(BaseAttributes.Attribute.Mind);
 
-        mainApp.batch.draw(texHeroPortrait, origin_x-1, origin_y+1, 110, 66);
-        font.draw(mainApp.batch, hero.name, origin_x, origin_y + 64);
+        Render.batch.draw(texHeroPortrait, origin_x-1, origin_y+1, 110, 66);
+        font.draw(Render.batch, hero.name, origin_x, origin_y + 64);
 
-        font.draw(mainApp.batch, fys + "("+fysMax+")", origin_x+60, origin_y + 64-16);
-        font.draw(mainApp.batch, agi + "("+agiMax+")", origin_x+60, origin_y + 64-32);
-        font.draw(mainApp.batch, mind + "("+mindMax+")", origin_x+60, origin_y + 64-48);
+        font.draw(Render.batch, fys + "("+fysMax+")", origin_x+60, origin_y + 64-16);
+        font.draw(Render.batch, agi + "("+agiMax+")", origin_x+60, origin_y + 64-32);
+        font.draw(Render.batch, mind + "("+mindMax+")", origin_x+60, origin_y + 64-48);
 
-        mainApp.batch.draw(gradientGreen, origin_x+8, origin_y + 64-32, 44, 16);
-        mainApp.batch.draw(gradientGreen, origin_x+8, origin_y + 64-48, 44, 16);
-        mainApp.batch.draw(gradientGreen, origin_x+8, origin_y + 64-64, 44, 16);
+        Render.batch.draw(gradientGreen, origin_x+8, origin_y + 64-32, 44, 16);
+        Render.batch.draw(gradientGreen, origin_x+8, origin_y + 64-48, 44, 16);
+        Render.batch.draw(gradientGreen, origin_x+8, origin_y + 64-64, 44, 16);
 
-        mainApp.batch.draw(gradientRed, origin_x+10, origin_y + 64-30, 40*fys/fysMax, 12);
-        mainApp.batch.draw(gradientOrange, origin_x+10, origin_y + 64-46, 40*agi/agiMax, 12);
-        mainApp.batch.draw(gradientBlue, origin_x+10, origin_y + 64-62, 40*mind/mindMax, 12);
+        Render.batch.draw(gradientRed, origin_x+10, origin_y + 64-30, 40*fys/fysMax, 12);
+        Render.batch.draw(gradientOrange, origin_x+10, origin_y + 64-46, 40*agi/agiMax, 12);
+        Render.batch.draw(gradientBlue, origin_x+10, origin_y + 64-62, 40*mind/mindMax, 12);
     }
 
     public void dispose() {
